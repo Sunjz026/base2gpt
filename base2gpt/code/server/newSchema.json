@@ -1,0 +1,98 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Lark API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://generatssistant-larkbase-nuyifwmegy.ap-southeast-1.fcapp.run"
+        }
+    ],
+    "paths": {
+        "/init/table": {
+            "get": {
+                "description": "initialization a bitable in this base.",
+                "operationId": "initBitable"
+            }
+        },
+        "/add/record/{app_token}/{table_id}": {
+            "post": {
+                "description": "Add a new record to a table in this base.",
+                "operationId": "addRecord",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "app_token",
+                        "required": true,
+                        "description": "token of a bitable",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "table_id",
+                        "required": true,
+                        "description": "id of table",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "FileUrl": {
+                                        "type": "string"
+                                    },
+                                    "Prompt": {
+                                        "type": "string"
+                                    },
+                                    "Tags": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "FileUrl"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/generate/image": {
+            "post": {
+                "description": "generate a new image based on given description.",
+                "operationId": "generateImage",
+                "requestBody": {
+                    "description": "JSON data to be sent",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "description"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
